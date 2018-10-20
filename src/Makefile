@@ -1,15 +1,17 @@
-IDIR=../include
-CC=g++
-CFLAGS=-I$(IDIR)
+IDIR = ../include
+CC = g++
+CFLAGS = -I$(IDIR) -g -Wall
 
-ODIR=obj
-LDIR=../lib
+ODIR = obj
+LDIR = ../lib
 
-LIBS=-lm
+LIBS = -lm
 
 DEPS =
 
 OBJ = main.o
+
+TARGET = calculator.bin
 
 # Add header files here
 _DEPS = 
@@ -21,10 +23,16 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 $(ODIR)/%.o: %.cpp $(DEPS)
 	$(CC) -c $< -o $@ $(CFLAGS)
 
-calculator.bin: $(OBJ)
+$(TARGET): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
-.PHONY: clean
 
+.PHONY: all
+all: $(TARGET)
+
+.PHONY: clean
 clean:
 	rm -f *.bin $(ODIR)/*.o *~ core $(INCDIR)/*~
+
+.PHONY: force
+force: clean all
