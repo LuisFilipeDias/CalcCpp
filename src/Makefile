@@ -9,15 +9,13 @@ LIBS = -lm
 
 DEPS =
 
-OBJ = main.o
-
 TARGET = calculator.bin
 
 # Add header files here
 _DEPS = 
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.o
+_OBJ = main.o calculator.o logger.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.cpp $(DEPS)
