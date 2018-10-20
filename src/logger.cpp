@@ -2,26 +2,31 @@
 
 #include "logger.h"
 
-Logger::Logger()
+void Logger::log(const std::string& txt, const t_Trace& trace)
 {
-    std::cout << "Logger" << std::endl;
+    if( TRACE <= trace)
+    {
+        std::cout << txt << std::endl;
+    }
 }
 
-Logger::~Logger()
+Logger::Logger()
 {
-    std::cout << "~Logger" << std::endl;
+    Logger::log(__FUNCTION__, TRACE_DEBUG);
 }
 
 t_Error Logger::getMode(t_Mode& mode)
 {
-    t_Error err_code = ERR_NONE;
-    char mode_chr;
+    Logger::log(__FUNCTION__, TRACE_DEBUG);
 
-    std::cout << "Select calculator:" << std::endl;
-    std::cout << "1 - Basic" << std::endl;
-    std::cout << "2 - Scientific" << std::endl;
-    std::cout << "3 - Programmer" << std::endl;
-    std::cout << "X - Exit" << std::endl;
+    char mode_chr;
+    t_Error err_code = ERR_NONE;
+
+    Logger::log("Select calculator:", 	TRACE_INFO);
+    Logger::log("1 - Basic", 		TRACE_INFO);
+    Logger::log("2 - Scientific", 	TRACE_INFO);
+    Logger::log("3 - Programmer", 	TRACE_INFO);
+    Logger::log("X - Exit", 		TRACE_INFO);
     std::cin >> mode_chr;
 
     mode = (t_Mode) mode_chr;
@@ -32,7 +37,7 @@ t_Error Logger::getMode(t_Mode& mode)
 
     if((MODE_BASIC > mode || MODE_PROGRAMMER < mode) && MODE_EXIT != mode && MODE_Exit != mode)
     {
-        std::cout << "** Invalid mode. Try again..." << std::endl;
+        Logger::log("** Invalid mode. Try again...", TRACE_ERROR);
         err_code = ERR_INVALID_MODE;
     }
     else
@@ -41,4 +46,9 @@ t_Error Logger::getMode(t_Mode& mode)
     }
 
     return err_code;
+}
+
+Logger::~Logger()
+{
+    Logger::log(__FUNCTION__, TRACE_DEBUG);
 }

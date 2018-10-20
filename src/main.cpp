@@ -10,8 +10,10 @@
 #include "logger.h"
 #include "calculator.h"
 
-Calculator* process(const t_Mode& mode)
+static Calculator* process(const t_Mode& mode)
 {
+    Logger::log(__FUNCTION__, TRACE_DEBUG);
+
     static Calculator* calc;
     if(MODE_BASIC == mode && (calc == nullptr || calc->getActiveMode() != MODE_BASIC))
     {
@@ -30,7 +32,7 @@ Calculator* process(const t_Mode& mode)
     }
     else if(MODE_EXIT == mode || MODE_Exit == mode)
     {
-        std::cout << "Leaving..." << std::endl;
+        Logger::log("Leaving...", TRACE_INFO);
         delete calc;
         calc = nullptr;
     }
@@ -42,8 +44,10 @@ Calculator* process(const t_Mode& mode)
     return calc;
 }
 
-void mainLoop(void)
+static void mainLoop(void)
 {
+    Logger::log(__FUNCTION__, TRACE_DEBUG);
+
     t_Mode mode = MODE_NONE;
     Logger* logger = new Logger();
 
@@ -58,11 +62,18 @@ void mainLoop(void)
                 calc->readMode();
             }
         }
+        else
+        {
+            Logger::log("Failed to process mode. Leaving...", TRACE_FATAL);
+            return;
+        }
     }
     delete logger;
 }
 
 int main(void)
 {
+    Logger::log(__FUNCTION__, TRACE_DEBUG);
+
     mainLoop();
 }
