@@ -1,0 +1,7 @@
+.*.swp
+src/.*.swp
+*~
+src/*~
+src/*.bin
+src/obj
+src/.Makefile.swp
