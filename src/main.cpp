@@ -70,6 +70,8 @@ int main(void)
     /* Scoped pointer example. */
     ScopedHelloWorld scoped_hw = new HelloWorld();
 
+    scoped_hw->printHello();
+
     Logger::log(__FUNCTION__, TRACE_DEBUG);
 
     mainLoop();

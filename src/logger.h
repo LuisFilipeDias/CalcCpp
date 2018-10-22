@@ -31,6 +31,11 @@ public:
     {
         Logger::log(__FUNCTION__, TRACE_DEBUG);
     }
+
+    void printHello() const
+    {
+        Logger::log("Hello World!", TRACE_INFO);
+    }
 };
 
 class ScopedHelloWorld{
@@ -40,6 +45,12 @@ public:
     ScopedHelloWorld(HelloWorld* hw): l_hw(hw)
     {
         Logger::log(__FUNCTION__, TRACE_DEBUG);
+    }
+
+    /* Overloading the arrow operator to be able to dereference the internal HelloWorld object. */
+    const HelloWorld* operator->() const
+    {
+        return l_hw;
     }
 
     ~ScopedHelloWorld()
