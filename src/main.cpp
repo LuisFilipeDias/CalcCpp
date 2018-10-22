@@ -33,10 +33,6 @@ static std::shared_ptr<Calculator> process(const t_Mode& mode)
         Logger::log("Leaving...", TRACE_INFO);
         calc = nullptr;
     }
-    else
-    {
-        calc = nullptr;
-    }
 
     return calc;
 }

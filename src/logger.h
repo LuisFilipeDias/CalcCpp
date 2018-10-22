@@ -12,6 +12,12 @@ public:
     // Not Explicit, this means we can do this: Logger L = TRACE_DEBUG;
     Logger(const t_Trace& trace) : l_trace(trace){}
 
+    /* For some reason cannot delete the copy constructor because now explicit conversion does not work...*/
+# if 0
+    /* Don't want to allow copy constructor for this class. */
+    Logger(const Logger& other) = delete;
+#endif
+
     /* Const because this method doesn't change this class. */
     t_Error selectMode(t_Mode &mode) const;
 
