@@ -17,3 +17,28 @@ public:
 
     ~Logger();
 };
+
+
+class HelloWorld{
+public:
+    HelloWorld()
+    {
+        Logger::log(__FUNCTION__, TRACE_DEBUG);
+    }
+};
+
+class ScopedHelloWorld{
+private:
+    HelloWorld* l_hw;
+public:
+    ScopedHelloWorld(HelloWorld* hw): l_hw(hw)
+    {
+        Logger::log(__FUNCTION__, TRACE_DEBUG);
+    }
+
+    ~ScopedHelloWorld()
+    {
+        Logger::log(__FUNCTION__, TRACE_DEBUG);
+        delete l_hw;
+    }
+};

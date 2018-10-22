@@ -71,6 +71,9 @@ static void mainLoop(void)
 
 int main(void)
 {
+    /* Scoped pointer example. */
+    ScopedHelloWorld scoped_hw = new HelloWorld();
+
     Logger::log(__FUNCTION__, TRACE_DEBUG);
 
     mainLoop();
