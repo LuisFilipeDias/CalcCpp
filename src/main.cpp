@@ -9,31 +9,28 @@
 
 #include "logger.h"
 #include "calculator.h"
+#include <memory>
 
-static Calculator* process(const t_Mode& mode)
+static std::shared_ptr<Calculator> process(const t_Mode& mode)
 {
     Logger::log(__FUNCTION__, TRACE_DEBUG);
 
-    static Calculator* calc;
+    static std::shared_ptr<Calculator> calc;
     if(MODE_BASIC == mode && (calc == nullptr || calc->getActiveMode() != MODE_BASIC))
     {
-        delete calc;
-        calc = new BasicCalc();
+        calc = std::make_shared<BasicCalc>();
     }
     else if(MODE_SCIENTIFIC == mode && (calc == nullptr || calc->getActiveMode() != MODE_SCIENTIFIC))
     {
-        delete calc;
-        calc = new ScientificCalc();
+        calc = std::make_shared<ScientificCalc>();
     }
     else if(MODE_PROGRAMMER == mode && (calc == nullptr || calc->getActiveMode() != MODE_PROGRAMMER))
     {
-        delete calc;
-        calc = new ProgrammerCalc();
+        calc = std::make_shared<ProgrammerCalc>();
     }
     else if(MODE_EXIT == mode || MODE_Exit == mode)
     {
         Logger::log("Leaving...", TRACE_INFO);
-        delete calc;
         calc = nullptr;
     }
     else
@@ -58,8 +55,8 @@ static void mainLoop(void)
     {
         if(ERR_NONE == logger.selectMode(mode))
         {
-            Calculator* calc = process(mode);
-            if(nullptr != (void*)calc)
+            std::shared_ptr<Calculator> calc = process(mode);
+            if(nullptr != calc)
             {
                 calc->readMode();
             }
