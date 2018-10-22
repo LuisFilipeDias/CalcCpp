@@ -49,12 +49,14 @@ static void mainLoop(void)
     Logger::log(__FUNCTION__, TRACE_DEBUG);
 
     t_Mode mode = MODE_NONE;
-    Logger* logger = new Logger();
+
+    /* Implicit conversion - sounds nice... */
+    Logger logger = TRACE;
 
     /* Probably there is a more elegant solution for case sensitive comparisons. */
     while(MODE_EXIT != mode && MODE_Exit != mode)
     {
-        if(ERR_NONE == logger->getMode(mode))
+        if(ERR_NONE == logger.selectMode(mode))
         {
             Calculator* calc = process(mode);
             if(nullptr != (void*)calc)
@@ -68,7 +70,6 @@ static void mainLoop(void)
             return;
         }
     }
-    delete logger;
 }
 
 int main(void)

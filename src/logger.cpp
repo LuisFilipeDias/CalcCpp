@@ -10,12 +10,7 @@ void Logger::log(const std::string& txt, const t_Trace& trace)
     }
 }
 
-Logger::Logger()
-{
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
-}
-
-t_Error Logger::getMode(t_Mode& mode)
+t_Error Logger::selectMode(t_Mode& mode) const
 {
     Logger::log(__FUNCTION__, TRACE_DEBUG);
 

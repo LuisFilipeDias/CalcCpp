@@ -8,7 +8,6 @@ Calculator::Calculator(void)
 
 void Calculator::readMode(void)
 {
-
     Logger::log("Insert mode: ", TRACE_INFO);
     std::getline(std::cin, l_mode_str);
     std::cout << l_mode_str << std::endl;
@@ -21,7 +20,7 @@ void Calculator::setActiveMode(const t_Mode& mode)
     l_mode = mode;
 }
 
-t_Mode Calculator::getActiveMode(void)
+t_Mode Calculator::getActiveMode(void) const
 {
     Logger::log(__FUNCTION__, TRACE_DEBUG);
 

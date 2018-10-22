@@ -1,3 +1,4 @@
+#pragma once
 #include "common.h"
 
 class Calculator
@@ -15,7 +16,7 @@ public:
 
     void setActiveMode(const t_Mode& mode);
 
-    t_Mode getActiveMode(void);
+    t_Mode getActiveMode(void) const;
 
     virtual void readMode(void);
 
@@ -25,7 +26,7 @@ public:
 class BasicCalc : public Calculator
 {
 public:
-    BasicCalc(void);
+    explicit BasicCalc(void);
 
     void readMode(void);
 
@@ -35,7 +36,7 @@ public:
 class ScientificCalc : public BasicCalc
 {
 public:
-    ScientificCalc(void);
+    explicit ScientificCalc(void);
 
     ~ScientificCalc(void);
 };
@@ -43,7 +44,7 @@ public:
 class ProgrammerCalc : public Calculator
 {
 public:
-    ProgrammerCalc(void);
+    explicit ProgrammerCalc(void);
 
     ~ProgrammerCalc(void);
 };

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-#define TRACE TRACE_WARNING
+#define TRACE TRACE_DEBUG
 
 typedef enum{
     ERR_NONE = 0,
