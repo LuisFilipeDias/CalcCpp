@@ -1,5 +1,6 @@
 .*.swp
 src/.*.swp
+src/*.autosave
 *~
 src/*~
 src/*.bin

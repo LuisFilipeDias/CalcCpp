@@ -54,7 +54,7 @@ static void mainLoop(void)
             std::shared_ptr<Calculator> calc = process(mode);
             if(nullptr != calc)
             {
-                calc->readMode();
+                calc->readOperation();
             }
         }
         else

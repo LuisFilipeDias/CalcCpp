@@ -1,15 +1,18 @@
 #pragma once
 #include "common.h"
+#include "logger.h"
+#include <regex>
 
 class Calculator
 {
 private:
-    std::string l_mode_str;
+    std::string l_operation_str;
     t_Mode l_mode = MODE_NONE;
 
 protected:
     char l_op;
     int l_a, l_b;
+    std::string l_supported_ops;
 
 public:
     Calculator(void);
@@ -21,7 +24,7 @@ public:
 
     t_Mode getActiveMode(void) const;
 
-    virtual void readMode(void);
+    virtual void readOperation(void);
 
     virtual ~Calculator(void);
 };
@@ -34,7 +37,7 @@ public:
     /* Don't want to allow copy constructor for this class. */
     BasicCalc(const BasicCalc& other) = delete;
 
-    void readMode(void);
+    void readOperation(void);
 
     ~BasicCalc(void);
 };
