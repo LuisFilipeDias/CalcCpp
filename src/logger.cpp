@@ -13,6 +13,11 @@ void Logger::log(const std::string& txt)
     Logger::log(txt, TRACE_INFO);
 }
 
+void Logger::log(const int& n)
+{
+    Logger::log(n, TRACE_INFO);
+}
+
 void Logger::log(const int &n, const t_Trace& trace)
 {
     if( TRACE <= trace)

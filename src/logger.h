@@ -11,6 +11,7 @@ public:
     static void log(const int& n, const t_Trace& trace);
     static void log(const char& n, const t_Trace& trace);
     static void log(const std::string& txt);
+    static void log(const int& n);
 
     // Not Explicit, this means we can do this: Logger L = TRACE_DEBUG;
     Logger(const t_Trace& trace) : l_trace(trace){}

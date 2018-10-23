@@ -9,13 +9,14 @@ private:
     std::string l_operation_str;
     t_Mode l_mode = MODE_NONE;
 
-    void applyRegex(const std::string& re_str, const std::regex& pattern, std::vector<char>& regexVector);
+    void applyRegex(const std::string& re_str, const std::regex& pattern, std::vector<std::string>& regexVector);
+
+    void processOperation(void);
 
 protected:
     char l_op;
-    int l_a, l_b;
     std::string l_supported_ops;
-    std::vector<char> numbers, operators;
+    std::vector<std::string> numbers, operators;
 
 public:
     Calculator(void);
@@ -39,8 +40,6 @@ public:
 
     /* Don't want to allow copy constructor for this class. */
     BasicCalc(const BasicCalc& other) = delete;
-
-    void readOperation(void);
 
     ~BasicCalc(void);
 };
