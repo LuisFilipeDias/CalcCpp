@@ -5,9 +5,24 @@
 void Logger::log(const std::string& txt, const t_Trace& trace)
 {
     if( TRACE <= trace)
-    {
         std::cout << txt << std::endl;
-    }
+}
+
+void Logger::log(const std::string& txt)
+{
+    Logger::log(txt, TRACE_INFO);
+}
+
+void Logger::log(const int &n, const t_Trace& trace)
+{
+    if( TRACE <= trace)
+        std::cout << n << std::endl;
+}
+
+void Logger::log(const char& c, const t_Trace& trace)
+{
+    if( TRACE <= trace)
+        std::cout << c << std::endl;
 }
 
 t_Error Logger::selectMode(t_Mode& mode) const

@@ -9,10 +9,13 @@ private:
     std::string l_operation_str;
     t_Mode l_mode = MODE_NONE;
 
+    void applyRegex(const std::string& re_str, const std::regex& pattern, std::vector<char>& regexVector);
+
 protected:
     char l_op;
     int l_a, l_b;
     std::string l_supported_ops;
+    std::vector<char> numbers, operators;
 
 public:
     Calculator(void);
