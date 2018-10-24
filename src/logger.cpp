@@ -2,46 +2,21 @@
 
 #include "logger.h"
 
-void Logger::log(const std::string& txt, const t_Trace& trace)
-{
-    if( TRACE <= trace)
-        std::cout << txt << std::endl;
-}
-
-void Logger::log(const std::string& txt)
-{
-    Logger::log(txt, TRACE_INFO);
-}
-
-void Logger::log(const int& n)
-{
-    Logger::log(n, TRACE_INFO);
-}
-
-void Logger::log(const int &n, const t_Trace& trace)
-{
-    if( TRACE <= trace)
-        std::cout << n << std::endl;
-}
-
-void Logger::log(const char& c, const t_Trace& trace)
-{
-    if( TRACE <= trace)
-        std::cout << c << std::endl;
-}
-
 t_Error Logger::selectMode(t_Mode& mode) const
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
     char mode_chr;
-    t_Error err_code = ERR_NONE;
 
-    Logger::log("Select calculator:", 	TRACE_INFO);
-    Logger::log("1 - Basic", 		TRACE_INFO);
-    Logger::log("2 - Scientific", 	TRACE_INFO);
-    Logger::log("3 - Programmer", 	TRACE_INFO);
-    Logger::log("X - Exit", 		TRACE_INFO);
+    /* Testing auto keyword - let compiler find out the type.
+     * This is very usefull for client side avoing changes every time the API changes. */
+    auto err_code = ERR_NONE;
+
+    Logger::log<std::string>("Select calculator:", 	TRACE_INFO);
+    Logger::log<std::string>("1 - Basic", 		TRACE_INFO);
+    Logger::log<std::string>("2 - Scientific", 	TRACE_INFO);
+    Logger::log<std::string>("3 - Programmer", 	TRACE_INFO);
+    Logger::log<std::string>("X - Exit", 		TRACE_INFO);
     std::cin >> mode_chr;
 
     mode = (t_Mode) mode_chr;
@@ -52,7 +27,7 @@ t_Error Logger::selectMode(t_Mode& mode) const
 
     if((MODE_BASIC > mode || MODE_PROGRAMMER < mode) && MODE_EXIT != mode && MODE_Exit != mode)
     {
-        Logger::log("** Invalid mode. Try again...", TRACE_ERROR);
+        Logger::log<std::string>("** Invalid mode. Try again...", TRACE_ERROR);
         err_code = ERR_INVALID_MODE;
     }
     else
@@ -65,5 +40,5 @@ t_Error Logger::selectMode(t_Mode& mode) const
 
 Logger::~Logger()
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 }

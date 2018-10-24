@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 
+//////////////////////7Add PREPROCESSOR DEFINITION FOR DEBUG AND RELEASE TRACES
+
 #define TRACE TRACE_DEBUG
 
 typedef enum{

@@ -2,7 +2,7 @@
 
 Calculator::Calculator(void)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
     /* We will always need two numbers, so go ahead and reserve space for at least three - this optimization
      * allows us to avoid memory re-allocation in case the vector can't hold 2 elements in the first memory location.
@@ -12,7 +12,7 @@ Calculator::Calculator(void)
 
 void Calculator::applyRegex(const std::string& re_str, const std::regex& re_pattern, std::vector<std::string> &regexVector)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
     regexVector.clear();
 
@@ -45,11 +45,11 @@ void Calculator::applyRegex(const std::string& re_str, const std::regex& re_patt
 
 void Calculator::readOperation(void)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
-    Logger::log("Supported operations", TRACE_INFO);
+    Logger::log<std::string>("Supported operations", TRACE_INFO);
     Logger::log(l_supported_ops, TRACE_INFO);
-    Logger::log("Enter operation: ", TRACE_INFO);
+    Logger::log<std::string>("Enter operation: ", TRACE_INFO);
     std::getline(std::cin, l_operation_str);
 
     /* Apply regex to find the numbers. */
@@ -64,7 +64,7 @@ void Calculator::readOperation(void)
 /* NOTE: At the moment this calculator does not take into account precedence. */
 void Calculator::processOperation(void)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
     int a;
 
@@ -108,32 +108,32 @@ void Calculator::processOperation(void)
         }
     }
 
-    Logger::log("** Result is: ");
-    Logger::log(a);
+    Logger::log<std::string>("** Result is: ");
+    Logger::log<int>(a);
 }
 
 void Calculator::setActiveMode(const t_Mode& mode)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
     l_mode = mode;
 }
 
 t_Mode Calculator::getActiveMode(void) const
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
     return l_mode;
 }
 
 Calculator::~Calculator(void)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 }
 
 BasicCalc::BasicCalc(void)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
     Calculator();
 
@@ -144,12 +144,12 @@ BasicCalc::BasicCalc(void)
 
 BasicCalc::~BasicCalc(void)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 }
 
 ScientificCalc::ScientificCalc(void)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
     Calculator();
 
@@ -160,12 +160,12 @@ ScientificCalc::ScientificCalc(void)
 
 ScientificCalc::~ScientificCalc(void)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 }
 
 ProgrammerCalc::ProgrammerCalc(void)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
     Calculator();
 
@@ -176,5 +176,5 @@ ProgrammerCalc::ProgrammerCalc(void)
 
 ProgrammerCalc::~ProgrammerCalc(void)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 }

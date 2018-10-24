@@ -7,11 +7,18 @@ private:
     t_Trace l_trace = TRACE_ERROR;
 
 public:
-    static void log(const std::string& txt, const t_Trace& trace);
-    static void log(const int& n, const t_Trace& trace);
-    static void log(const char& n, const t_Trace& trace);
-    static void log(const std::string& txt);
-    static void log(const int& n);
+    template<typename t>
+    static void log(const t& txt, const t_Trace& trace)
+    {
+        if( TRACE <= trace)
+            std::cout << txt << std::endl;
+    }
+
+    template<typename t>
+    static void log(const t& txt)
+    {
+        Logger::log<t>(txt, TRACE_INFO);
+    }
 
     // Not Explicit, this means we can do this: Logger L = TRACE_DEBUG;
     Logger(const t_Trace& trace) : l_trace(trace){}
@@ -33,12 +40,17 @@ class HelloWorld{
 public:
     HelloWorld()
     {
-        Logger::log(__FUNCTION__, TRACE_DEBUG);
+        Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
     }
 
     void printHello() const
     {
-        Logger::log("Hello World!", TRACE_INFO);
+        Logger::log<std::string>("Hello World!");
+    }
+
+    static void printBye()
+    {
+        Logger::log<std::string>("Bye World...");
     }
 };
 
@@ -48,7 +60,7 @@ private:
 public:
     ScopedHelloWorld(HelloWorld* hw): l_hw(hw)
     {
-        Logger::log(__FUNCTION__, TRACE_DEBUG);
+        Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
     }
 
     /* Overloading the arrow operator to be able to dereference the internal HelloWorld object. */
@@ -59,7 +71,7 @@ public:
 
     ~ScopedHelloWorld()
     {
-        Logger::log(__FUNCTION__, TRACE_DEBUG);
+        Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
         delete l_hw;
     }
 };

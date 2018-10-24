@@ -16,6 +16,9 @@ private:
 protected:
     char l_op;
     std::string l_supported_ops;
+    /* Must not forget that the vectors are created in the heap. This is kind of obvious because otherwise how could
+     * we push back more elements without needing to allocate more memory in the stack? std::array is a bit different
+     * though, as the size is statically defined at compile time, it can be stored in the stack. */
     std::vector<std::string> numbers, operators;
 
 public:

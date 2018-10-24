@@ -13,7 +13,7 @@
 
 static std::shared_ptr<Calculator> process(const t_Mode& mode)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
     static std::shared_ptr<Calculator> calc;
     if(MODE_BASIC == mode && (calc == nullptr || calc->getActiveMode() != MODE_BASIC))
@@ -30,7 +30,7 @@ static std::shared_ptr<Calculator> process(const t_Mode& mode)
     }
     else if(MODE_EXIT == mode || MODE_Exit == mode)
     {
-        Logger::log("Leaving...", TRACE_INFO);
+        Logger::log<std::string>("Leaving...", TRACE_INFO);
         calc = nullptr;
     }
 
@@ -39,7 +39,7 @@ static std::shared_ptr<Calculator> process(const t_Mode& mode)
 
 static void mainLoop(void)
 {
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
     t_Mode mode = MODE_NONE;
 
@@ -59,7 +59,7 @@ static void mainLoop(void)
         }
         else
         {
-            Logger::log("Failed to process mode. Leaving...", TRACE_FATAL);
+            Logger::log<std::string>("Failed to process mode. Leaving...", TRACE_FATAL);
             return;
         }
     }
@@ -67,12 +67,16 @@ static void mainLoop(void)
 
 int main(void)
 {
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
+
     /* Scoped pointer example. */
     ScopedHelloWorld scoped_hw = new HelloWorld();
 
     scoped_hw->printHello();
 
-    Logger::log(__FUNCTION__, TRACE_DEBUG);
-
     mainLoop();
+
+    void(*byeMessage)() = HelloWorld::printBye;
+
+    byeMessage();
 }
