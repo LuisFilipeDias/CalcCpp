@@ -48,7 +48,7 @@ public:
         Logger::log<std::string>("Hello World!");
     }
 
-    static void printBye()
+    static void printBye(int foo)
     {
         Logger::log<std::string>("Bye World...");
     }

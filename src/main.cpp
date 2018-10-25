@@ -76,7 +76,8 @@ int main(void)
 
     mainLoop();
 
-    void(*byeMessage)() = HelloWorld::printBye;
+    /* could use auto instead. */
+    void(*byeMessage)(int) = HelloWorld::printBye;
 
-    byeMessage();
+    byeMessage(0);
 }

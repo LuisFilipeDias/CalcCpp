@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <regex>
+#include <thread>
 
 //////////////////////7Add PREPROCESSOR DEFINITION FOR DEBUG AND RELEASE TRACES
 

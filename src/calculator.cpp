@@ -1,5 +1,10 @@
 ﻿#include "calculator.h"
 
+/* To be able to use 1s on thread sleep. */
+using namespace std::literals::chrono_literals;
+
+bool Calculator::calcDone = false;
+
 Calculator::Calculator(void)
 {
     Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
@@ -66,6 +71,31 @@ void Calculator::processOperation(void)
 {
     Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
+    int result;
+
+    Calculator::calcDone = false;
+
+    std::thread t_calculation(calculationThread, std::ref(numbers), std::ref(operators), std::ref(result));
+
+    Logger::log<std::string>("Calculating");
+
+    while(!Calculator::calcDone)
+    {
+        std::this_thread::sleep_for(100ms);
+        std::cout << "." << std::endl;
+    }
+
+    t_calculation.join();
+
+    Logger::log<std::string>("** Result is: ");
+    Logger::log<int>(result);
+}
+
+void Calculator::calculationThread(const std::vector<std::string>& numbers, const std::vector<std::string>& operators, int& result)
+{
+    Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
+
+    Timer t;
     int a;
 
     std::stringstream ss1(numbers[0]);
@@ -81,6 +111,7 @@ void Calculator::processOperation(void)
         std::stringstream ss3(operators[i]);
         ss3 >> op;
 
+        // Call another thread to do the calculus, and join them further ahead.
         switch(op)
         {
         case '+':
@@ -108,8 +139,12 @@ void Calculator::processOperation(void)
         }
     }
 
-    Logger::log<std::string>("** Result is: ");
-    Logger::log<int>(a);
+    result = a;
+
+    /* We don't want it to be to fast otherwise we won't see those nice dots...*/
+    std::this_thread::sleep_for(1s);
+
+    Calculator::calcDone = true;
 }
 
 void Calculator::setActiveMode(const t_Mode& mode)

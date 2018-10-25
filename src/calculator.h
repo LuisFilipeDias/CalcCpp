@@ -1,17 +1,21 @@
 #pragma once
 #include "common.h"
 #include "logger.h"
-#include <regex>
+#include "timer.h"
 
 class Calculator
 {
 private:
+    static bool calcDone;
+
     std::string l_operation_str;
     t_Mode l_mode = MODE_NONE;
 
     void applyRegex(const std::string& re_str, const std::regex& pattern, std::vector<std::string>& regexVector);
 
     void processOperation(void);
+
+    static void calculationThread(const std::vector<std::string>& numbers, const std::vector<std::string>& operators, int& result);
 
 protected:
     char l_op;
