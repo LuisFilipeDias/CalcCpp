@@ -8,7 +8,7 @@ class Calculator
 private:
     static bool calcDone;
 
-    std::string l_operation_str;
+    std::string l_operation_str = "";
     t_Mode l_mode = MODE_NONE;
 
     void applyRegex(const std::string& re_str, const std::regex& pattern, std::vector<std::string>& regexVector);
@@ -38,6 +38,8 @@ public:
     virtual void readOperation(void);
 
     virtual ~Calculator(void);
+
+    t_Mode getMode(void);
 };
 
 class BasicCalc : public Calculator
@@ -48,7 +50,7 @@ public:
     /* Don't want to allow copy constructor for this class. */
     BasicCalc(const BasicCalc& other) = delete;
 
-    ~BasicCalc(void);
+    ~BasicCalc(void) override;
 };
 
 class ScientificCalc : public BasicCalc
@@ -59,7 +61,7 @@ public:
     /* Don't want to allow copy constructor for this class. */
     ScientificCalc(const ScientificCalc& other) = delete;
 
-    ~ScientificCalc(void);
+    ~ScientificCalc(void) override;
 };
 
 class ProgrammerCalc : public Calculator
@@ -70,5 +72,5 @@ public:
     /* Don't want to allow copy constructor for this class. */
     ProgrammerCalc(const ProgrammerCalc& other) = delete;
 
-    ~ProgrammerCalc(void);
+    ~ProgrammerCalc(void) override;
 };

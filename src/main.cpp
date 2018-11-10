@@ -8,8 +8,9 @@
 */
 
 #include "logger.h"
+#include "common.h"
 #include "calculator.h"
-#include <memory>
+#include "test.h"
 
 static std::shared_ptr<Calculator> process(const t_Mode& mode)
 {
@@ -65,14 +66,19 @@ static void mainLoop(void)
     }
 }
 
-int main(void)
+int main(int argc, char* argv[])
 {
     Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
+
+    testing::InitGoogleTest(&argc, argv);
+    std::cout << RUN_ALL_TESTS() << std::endl;
 
     /* Scoped pointer example. */
     ScopedHelloWorld scoped_hw = new HelloWorld();
 
-    scoped_hw->printHello();
+    scoped_hw->printHello()
+              .printHello()
+              .printHello();
 
     mainLoop();
 

@@ -170,7 +170,7 @@ BasicCalc::BasicCalc(void)
 {
     Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
-    Calculator();
+    //Calculator();
 
     l_supported_ops = "[+, -, *, /, %, (, ), s, S]";
 
@@ -186,7 +186,7 @@ ScientificCalc::ScientificCalc(void)
 {
     Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
-    Calculator();
+    //Calculator();
 
     l_supported_ops = "[+, -, *, /, %, (, ), sqrt, square, cos, sin, tan, cosh, sinh, tanh, log, ln, Mod, Arg, Re, Im]";
 
@@ -202,7 +202,7 @@ ProgrammerCalc::ProgrammerCalc(void)
 {
     Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
 
-    Calculator();
+    //Calculator();
 
     l_supported_ops = "[+, -, *, /, %, (, ), sqrt, square, mod, ones, twos, AND, NOT, OR, XOR, log, log2, int, frac]";
 

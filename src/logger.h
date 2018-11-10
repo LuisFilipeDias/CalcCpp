@@ -43,9 +43,11 @@ public:
         Logger::log<std::string>(__FUNCTION__, TRACE_DEBUG);
     }
 
-    void printHello() const
+    /* Experimenting with fluid interfaces. */
+    HelloWorld& printHello()
     {
         Logger::log<std::string>("Hello World!");
+        return *this;
     }
 
     static void printBye(int foo)
@@ -64,7 +66,7 @@ public:
     }
 
     /* Overloading the arrow operator to be able to dereference the internal HelloWorld object. */
-    const HelloWorld* operator->() const
+    HelloWorld* operator->() const
     {
         return l_hw;
     }

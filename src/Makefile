@@ -5,7 +5,7 @@ CFLAGS = -I$(IDIR) -g -Wall -pthread
 ODIR = obj
 LDIR = ../lib
 
-LIBS = -lm
+LIBS = -lm -lgtest
 
 DEPS =
 
@@ -15,7 +15,7 @@ TARGET = calculator.bin
 _DEPS = 
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.o calculator.o logger.o timer.o
+_OBJ = main.o calculator.o logger.o timer.o test.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.cpp $(DEPS)
